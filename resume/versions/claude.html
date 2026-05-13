@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lisandro Joaquín Mentasti — CV (Claude Enhanced)</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Georgia', serif;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #1a1a1a;
+            background: #fdf6ee;
+        }
+
+        .print-bar {
+            background: #cc6b2c;
+            color: #fff;
+            padding: 12px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: -apple-system, sans-serif;
+            font-size: 13px;
+        }
+        .print-btn {
+            background: #fff;
+            color: #cc6b2c;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: -apple-system, sans-serif;
+        }
+        .print-btn:hover { background: #fdf0e6; }
+
+        .page {
+            max-width: 780px;
+            margin: 32px auto;
+            background: #fff;
+            padding: 52px 64px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: -apple-system, sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            color: #cc6b2c;
+            background: #fdf0e6;
+            border: 1px solid #f0c8a0;
+            padding: 3px 12px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+        }
+
+        header { margin-bottom: 32px; }
+        .header-rule { width: 48px; height: 3px; background: #cc6b2c; margin: 12px 0 8px; }
+        h1 { font-size: 27px; font-weight: 700; color: #111; letter-spacing: -0.3px; }
+        .subtitle { font-family: -apple-system, sans-serif; font-size: 13px; color: #666; margin-top: 4px; }
+
+        section { margin-bottom: 30px; }
+        .section-title {
+            font-family: -apple-system, sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #cc6b2c;
+            border-bottom: 1px solid #f0c8a0;
+            padding-bottom: 6px;
+            margin-bottom: 16px;
+        }
+
+        p.prose { font-size: 13px; color: #333; line-height: 1.8; }
+
+        .job-header { margin-bottom: 10px; }
+        .job-top { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px; }
+        .job-title { font-weight: 700; font-size: 15px; color: #111; }
+        .job-date { font-family: -apple-system, sans-serif; font-size: 12px; color: #999; }
+        .job-company { font-style: italic; font-size: 13px; color: #666; margin-top: 2px; }
+
+        ul { list-style: none; padding: 0; }
+        ul li {
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 7px;
+            font-size: 13px;
+            color: #333;
+            line-height: 1.65;
+        }
+        ul li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 9px;
+            width: 6px;
+            height: 1px;
+            background: #cc6b2c;
+        }
+
+        .edu-item { display: flex; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 4px; }
+        .edu-degree { font-weight: 700; font-size: 13px; color: #111; }
+        .edu-school { font-style: italic; font-size: 13px; color: #555; }
+        .edu-note { font-family: -apple-system, sans-serif; font-size: 11px; color: #cc6b2c; margin-top: 2px; }
+        .edu-date { font-family: -apple-system, sans-serif; font-size: 12px; color: #999; }
+
+        .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 40px; }
+        .skill-category { font-family: -apple-system, sans-serif; font-weight: 700; font-size: 12px; color: #333; margin-bottom: 3px; }
+        .skill-list { font-family: -apple-system, sans-serif; font-size: 12px; color: #666; }
+
+        .award-item { margin-bottom: 10px; }
+        .award-name { font-weight: 700; font-size: 13px; color: #111; }
+        .award-desc { font-size: 12px; color: #666; font-family: -apple-system, sans-serif; margin-top: 1px; }
+
+        @media print {
+            body { background: white; font-size: 12px; }
+            .print-bar { display: none; }
+            .page { margin: 0; padding: 32px 40px; box-shadow: none; max-width: 100%; }
+        }
+
+        @media (max-width: 600px) {
+            .page { padding: 32px 24px; margin: 16px; }
+            .skills-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="print-bar">
+        <span>🟠 Enhanced with Claude — precise, honest, shows depth and reasoning</span>
+        <button class="print-btn" onclick="window.print()">Save as PDF</button>
+    </div>
+
+    <div class="page">
+        <div class="badge">✦ Enhanced with Claude</div>
+
+        <header>
+            <h1>Lisandro Joaquín Mentasti</h1>
+            <div class="header-rule"></div>
+            <p class="subtitle">Site Reliability Engineer &nbsp;·&nbsp; London, UK &nbsp;·&nbsp; lisandro.mentasti@gmail.com &nbsp;·&nbsp; github.com/lmenta</p>
+        </header>
+
+        <section>
+            <div class="section-title">About</div>
+            <p class="prose">
+                I'm an SRE at Okta with six years building and operating the Workflows platform — a no-code automation product that sits in the critical path for enterprise customers. My work is at the intersection of software engineering and operations: I write code to make systems easier to run, design observability that surfaces the right signals, and try to understand failure modes well enough that the next incident is genuinely less likely to recur.
+            </p>
+            <p class="prose" style="margin-top: 10px">
+                I hold a Master's in Data Analytics Engineering from Northeastern (Fulbright Scholar) and am actively moving toward ML engineering — not as a career pivot, but as a natural extension of the infrastructure work I already do. Systems that run ML in production still need to be reliable, observable, and operable. That's where I'm headed.
+            </p>
+        </section>
+
+        <section>
+            <div class="section-title">Experience</div>
+            <div class="job-header">
+                <div class="job-top">
+                    <div class="job-title">Site Reliability Engineer</div>
+                    <div class="job-date">June 2019 – Present</div>
+                </div>
+                <div class="job-company">Okta &nbsp;·&nbsp; London, UK</div>
+            </div>
+            <ul>
+                <li>Own reliability engineering for Okta Workflows end-to-end: setting SLOs that reflect what customers actually care about, designing alerting that fires on symptoms rather than internal signals, and building the tooling that makes the platform operable as it scales.</li>
+                <li>Lead incident response and drive blameless post-mortems focused on systemic fixes — the goal is always to make the system less likely to fail, not to find who to blame.</li>
+                <li>Led migration of Workflows infrastructure to Kubernetes on AWS, which involved coordinating across teams with different priorities and timelines, not just writing deployment manifests.</li>
+                <li>Write automation that eliminates toil — not just to save time, but because humans make mistakes on repetitive tasks and systems should handle the repeatable parts.</li>
+                <li>Work with product engineering teams to make reliability a property of the system from the start, rather than something bolted on after incidents.</li>
+            </ul>
+        </section>
+
+        <section>
+            <div class="section-title">Education</div>
+            <div class="edu-item">
+                <div>
+                    <div class="edu-degree">Master of Science, Data Analytics Engineering</div>
+                    <div class="edu-school">Northeastern University · Boston, MA</div>
+                    <div class="edu-note">Fulbright Scholar · Dean's Office Fellow</div>
+                </div>
+                <div class="edu-date">2017 – 2019</div>
+            </div>
+            <div class="edu-item">
+                <div>
+                    <div class="edu-degree">Systems Engineering (Ingeniería en Sistemas)</div>
+                    <div class="edu-school">Universidad Tecnológica Nacional (UTN) · Argentina</div>
+                </div>
+                <div class="edu-date">2004 – 2009</div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-title">Skills</div>
+            <div class="skills-grid">
+                <div>
+                    <div class="skill-category">Infrastructure & Platform</div>
+                    <div class="skill-list">Kubernetes, Docker, OpenShift, Helm, Terraform, AWS, Azure AKS, CI/CD</div>
+                </div>
+                <div>
+                    <div class="skill-category">Languages & Frameworks</div>
+                    <div class="skill-list">Python, Bash, FastAPI, SQL (PostgreSQL, MySQL)</div>
+                </div>
+                <div>
+                    <div class="skill-category">Reliability & Observability</div>
+                    <div class="skill-list">Prometheus, Grafana, PagerDuty, SLOs/SLIs, incident response</div>
+                </div>
+                <div>
+                    <div class="skill-category">AI / ML (actively learning)</div>
+                    <div class="skill-list">ML pipelines, model deployment, MCP, CrewAI, data engineering</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-title">Recognition</div>
+            <div class="award-item">
+                <div class="award-name">Argentine Presidential Fellowship (Fulbright) — 2017</div>
+                <div class="award-desc">Awarded by the Argentine Ministry of Education for graduate study in the United States. One of a small cohort selected nationally each year.</div>
+            </div>
+            <div class="award-item">
+                <div class="award-name">Northeastern University Dean's Office Fellowship — 2017</div>
+                <div class="award-desc">Merit-based award from the College of Engineering, offered alongside the Fulbright.</div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

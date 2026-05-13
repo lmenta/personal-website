@@ -7,6 +7,191 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../css/theme.css">
     <link rel="stylesheet" href="../styles.css">
+    <style>
+        /* Modal overlay */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-box {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            width: 100%;
+            max-width: 480px;
+            transform: translateY(12px);
+            transition: transform 0.2s ease;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+        }
+        .modal-overlay.open .modal-box {
+            transform: translateY(0);
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 6px;
+        }
+        .modal-subtitle {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        /* Version cards */
+        .version-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .version-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px 14px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.15s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .version-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-1px);
+        }
+        .version-card.selected {
+            border-color: var(--accent-primary);
+            background: var(--bg-secondary);
+            box-shadow: 0 0 0 3px rgba(122, 162, 247, 0.15);
+        }
+        .version-card .card-icon { font-size: 20px; margin-bottom: 4px; }
+        .version-card .card-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .version-card .card-desc {
+            font-size: 11px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Version color accents */
+        .version-card[data-version="original"]:hover,
+        .version-card[data-version="original"].selected { border-color: #888; box-shadow: 0 0 0 3px rgba(136,136,136,0.15); }
+        .version-card[data-version="chatgpt"]:hover,
+        .version-card[data-version="chatgpt"].selected { border-color: #10a37f; box-shadow: 0 0 0 3px rgba(16,163,127,0.15); }
+        .version-card[data-version="claude"]:hover,
+        .version-card[data-version="claude"].selected { border-color: #cc6b2c; box-shadow: 0 0 0 3px rgba(204,107,44,0.15); }
+        .version-card[data-version="gemini"]:hover,
+        .version-card[data-version="gemini"].selected { border-color: #4285F4; box-shadow: 0 0 0 3px rgba(66,133,244,0.15); }
+
+        /* Step transitions */
+        .step { display: none; }
+        .step.active { display: block; }
+
+        /* PIN inputs */
+        .pin-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 24px 0 16px;
+        }
+        .pin-digit {
+            width: 56px;
+            height: 64px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.15s ease;
+            -webkit-text-security: disc;
+        }
+        .pin-digit:focus { border-color: var(--accent-primary); }
+        .pin-digit.error { border-color: #f7768e; animation: shake 0.4s ease; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-6px); }
+            40% { transform: translateX(6px); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+        }
+
+        .pin-error {
+            font-size: 12px;
+            color: #f7768e;
+            text-align: center;
+            margin-bottom: 8px;
+            height: 16px;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            background: var(--accent-primary);
+            color: white;
+            transition: opacity 0.15s ease;
+        }
+        .btn-primary:hover { opacity: 0.88; }
+        .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .btn-ghost {
+            background: none;
+            border: none;
+            font-size: 13px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 8px 0;
+            margin-top: 8px;
+            width: 100%;
+            transition: color 0.15s ease;
+        }
+        .btn-ghost:hover { color: var(--accent-primary); }
+
+        .selected-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 4px;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+    </style>
 </head>
 <body style="background: var(--bg-primary); color: var(--text-primary)">
 
@@ -24,12 +209,8 @@
                     </div>
                     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
                         <div class="theme-icons">
-                            <svg class="sun" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/>
-                            </svg>
-                            <svg class="moon" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
-                            </svg>
+                            <svg class="sun" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/></svg>
+                            <svg class="moon" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
                         </div>
                     </button>
                 </div>
@@ -48,16 +229,15 @@
                         <a href="mailto:lisandro.mentasti@gmail.com" class="hover:underline" style="color: var(--accent-primary)">lisandro.mentasti@gmail.com</a>
                     </p>
                 </div>
-                <a href="LisandroMentasti.pdf" download class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium self-start sm:self-auto" style="background: var(--accent-primary); color: white">
+                <button id="open-download-modal" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium self-start sm:self-auto cursor-pointer border-none" style="background: var(--accent-primary); color: white">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                    Download PDF
-                </a>
+                    Download CV
+                </button>
             </div>
         </div>
 
         <div class="space-y-10">
 
-            <!-- Summary -->
             <section>
                 <h2 class="text-xs font-semibold uppercase tracking-widest mb-4 pb-2" style="color: var(--accent-primary); border-bottom: 1px solid var(--border-color)">Summary</h2>
                 <p class="text-sm leading-relaxed" style="color: var(--text-secondary)">
@@ -65,10 +245,8 @@
                 </p>
             </section>
 
-            <!-- Experience -->
             <section>
                 <h2 class="text-xs font-semibold uppercase tracking-widest mb-6 pb-2" style="color: var(--accent-primary); border-bottom: 1px solid var(--border-color)">Experience</h2>
-
                 <div class="space-y-8">
                     <div>
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
@@ -89,10 +267,8 @@
                 </div>
             </section>
 
-            <!-- Education -->
             <section>
                 <h2 class="text-xs font-semibold uppercase tracking-widest mb-6 pb-2" style="color: var(--accent-primary); border-bottom: 1px solid var(--border-color)">Education</h2>
-
                 <div class="space-y-5">
                     <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
                         <div>
@@ -102,7 +278,6 @@
                         </div>
                         <span class="text-sm flex-shrink-0" style="color: var(--text-secondary)">2017 – 2019 · Boston, MA</span>
                     </div>
-
                     <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
                         <div>
                             <h3 class="font-semibold text-sm" style="color: var(--text-primary)">Systems Engineering (Ingeniería en Sistemas)</h3>
@@ -113,10 +288,8 @@
                 </div>
             </section>
 
-            <!-- Skills -->
             <section>
                 <h2 class="text-xs font-semibold uppercase tracking-widest mb-6 pb-2" style="color: var(--accent-primary); border-bottom: 1px solid var(--border-color)">Skills</h2>
-
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 text-sm">
                     <div>
                         <h3 class="font-medium mb-2" style="color: var(--text-primary)">Infrastructure & Platform</h3>
@@ -137,10 +310,8 @@
                 </div>
             </section>
 
-            <!-- Awards -->
             <section>
                 <h2 class="text-xs font-semibold uppercase tracking-widest mb-6 pb-2" style="color: var(--accent-primary); border-bottom: 1px solid var(--border-color)">Awards & Recognition</h2>
-
                 <div class="space-y-3 text-sm" style="color: var(--text-secondary)">
                     <div class="flex items-start gap-2">
                         <span style="color: var(--accent-primary)">·</span>
@@ -156,7 +327,6 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <footer style="border-top: 1px solid var(--border-color)">
         <div class="max-w-5xl mx-auto px-6 py-10">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
@@ -175,6 +345,212 @@
         </div>
     </footer>
 
+    <!-- Download Modal -->
+    <div id="download-modal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal-box">
+
+            <!-- Step 1: Choose version -->
+            <div id="step-version" class="step active">
+                <p class="modal-title">Download CV</p>
+                <p class="modal-subtitle">Choose which version you'd like. Each has a different voice and style.</p>
+
+                <div class="version-grid">
+                    <button class="version-card" data-version="original">
+                        <span class="card-icon">📄</span>
+                        <span class="card-name">Original</span>
+                        <span class="card-desc">Written by me — no AI</span>
+                    </button>
+                    <button class="version-card" data-version="chatgpt">
+                        <span class="card-icon">🟢</span>
+                        <span class="card-name">ChatGPT</span>
+                        <span class="card-desc">Action-focused, results-oriented</span>
+                    </button>
+                    <button class="version-card" data-version="claude">
+                        <span class="card-icon">🟠</span>
+                        <span class="card-name">Claude</span>
+                        <span class="card-desc">Precise, honest, shows depth</span>
+                    </button>
+                    <button class="version-card" data-version="gemini">
+                        <span class="card-icon">🔵</span>
+                        <span class="card-name">Gemini</span>
+                        <span class="card-desc">Achievement-led, data-forward</span>
+                    </button>
+                </div>
+
+                <button id="btn-to-pin" class="btn-primary" style="margin-top: 20px" disabled>
+                    Continue →
+                </button>
+                <button class="btn-ghost" id="btn-close-v">Cancel</button>
+            </div>
+
+            <!-- Step 2: Enter PIN -->
+            <div id="step-pin" class="step">
+                <p class="modal-title">Enter PIN</p>
+                <p class="modal-subtitle">Enter the 4-digit PIN to unlock the download.</p>
+
+                <div id="selected-version-badge" class="selected-badge"></div>
+
+                <div class="pin-row">
+                    <input class="pin-digit" type="tel" maxlength="1" inputmode="numeric" autocomplete="off">
+                    <input class="pin-digit" type="tel" maxlength="1" inputmode="numeric" autocomplete="off">
+                    <input class="pin-digit" type="tel" maxlength="1" inputmode="numeric" autocomplete="off">
+                    <input class="pin-digit" type="tel" maxlength="1" inputmode="numeric" autocomplete="off">
+                </div>
+
+                <p class="pin-error" id="pin-error"></p>
+
+                <button id="btn-confirm-pin" class="btn-primary" disabled>
+                    Download
+                </button>
+                <button class="btn-ghost" id="btn-back">← Choose a different version</button>
+            </div>
+
+        </div>
+    </div>
+
     <script src="../js/theme.js"></script>
+    <script>
+        const PIN = '6384';
+        const VERSIONS = {
+            original: { label: '📄 Original', file: 'versions/original.html' },
+            chatgpt:  { label: '🟢 ChatGPT',  file: 'versions/chatgpt.html' },
+            claude:   { label: '🟠 Claude',    file: 'versions/claude.html' },
+            gemini:   { label: '🔵 Gemini',    file: 'versions/gemini.html' },
+        };
+
+        const modal       = document.getElementById('download-modal');
+        const stepVersion = document.getElementById('step-version');
+        const stepPin     = document.getElementById('step-pin');
+        const btnToPin    = document.getElementById('btn-to-pin');
+        const btnConfirm  = document.getElementById('btn-confirm-pin');
+        const pinError    = document.getElementById('pin-error');
+        const pinDigits   = document.querySelectorAll('.pin-digit');
+        const versionBadge = document.getElementById('selected-version-badge');
+
+        let selectedVersion = null;
+
+        function openModal() {
+            modal.classList.add('open');
+            showStep('version');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+            setTimeout(resetModal, 200);
+        }
+
+        function resetModal() {
+            selectedVersion = null;
+            document.querySelectorAll('.version-card').forEach(c => c.classList.remove('selected'));
+            btnToPin.disabled = true;
+            pinDigits.forEach(d => { d.value = ''; d.classList.remove('error'); });
+            pinError.textContent = '';
+            btnConfirm.disabled = true;
+        }
+
+        function showStep(name) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step-' + name).classList.add('active');
+        }
+
+        // Open modal
+        document.getElementById('open-download-modal').addEventListener('click', openModal);
+
+        // Close on overlay click
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+        // Close buttons
+        document.getElementById('btn-close-v').addEventListener('click', closeModal);
+
+        // Version card selection
+        document.querySelectorAll('.version-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.version-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedVersion = card.dataset.version;
+                btnToPin.disabled = false;
+            });
+        });
+
+        // Go to PIN step
+        btnToPin.addEventListener('click', () => {
+            versionBadge.textContent = VERSIONS[selectedVersion].label;
+            showStep('pin');
+            pinDigits[0].focus();
+        });
+
+        // Back to version step
+        document.getElementById('btn-back').addEventListener('click', () => {
+            showStep('version');
+            pinDigits.forEach(d => { d.value = ''; d.classList.remove('error'); });
+            pinError.textContent = '';
+            btnConfirm.disabled = true;
+        });
+
+        // PIN input behaviour
+        pinDigits.forEach((digit, i) => {
+            digit.addEventListener('input', () => {
+                digit.value = digit.value.replace(/\D/g, '').slice(-1);
+                if (digit.value && i < pinDigits.length - 1) {
+                    pinDigits[i + 1].focus();
+                }
+                checkPinFilled();
+            });
+
+            digit.addEventListener('keydown', e => {
+                if (e.key === 'Backspace' && !digit.value && i > 0) {
+                    pinDigits[i - 1].focus();
+                    pinDigits[i - 1].value = '';
+                    checkPinFilled();
+                }
+                if (e.key === 'Enter' && !btnConfirm.disabled) {
+                    handleConfirm();
+                }
+            });
+
+            digit.addEventListener('paste', e => {
+                e.preventDefault();
+                const text = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 4);
+                text.split('').forEach((ch, j) => { if (pinDigits[j]) pinDigits[j].value = ch; });
+                if (pinDigits[text.length - 1]) pinDigits[Math.min(text.length, 3)].focus();
+                checkPinFilled();
+            });
+        });
+
+        function checkPinFilled() {
+            const filled = Array.from(pinDigits).every(d => d.value.length === 1);
+            btnConfirm.disabled = !filled;
+            pinError.textContent = '';
+            pinDigits.forEach(d => d.classList.remove('error'));
+        }
+
+        function getEnteredPin() {
+            return Array.from(pinDigits).map(d => d.value).join('');
+        }
+
+        function handleConfirm() {
+            if (getEnteredPin() === PIN) {
+                window.open(VERSIONS[selectedVersion].file, '_blank');
+                closeModal();
+            } else {
+                pinError.textContent = 'Incorrect PIN. Try again.';
+                pinDigits.forEach(d => { d.value = ''; d.classList.add('error'); });
+                btnConfirm.disabled = true;
+                setTimeout(() => {
+                    pinDigits.forEach(d => d.classList.remove('error'));
+                    pinDigits[0].focus();
+                }, 500);
+            }
+        }
+
+        btnConfirm.addEventListener('click', handleConfirm);
+
+        // Close on Escape
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+        });
+    </script>
 </body>
 </html>

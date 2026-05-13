@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lisandro Joaquín Mentasti — CV (Gemini Enhanced)</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Google Sans', -apple-system, 'Segoe UI', sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #202124;
+            background: #f0f4ff;
+        }
+
+        .print-bar {
+            background: linear-gradient(90deg, #4285F4, #0F9D58, #F4B400, #DB4437);
+            color: #fff;
+            padding: 12px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+        .print-btn {
+            background: #fff;
+            color: #4285F4;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .print-btn:hover { background: #e8f0fe; }
+
+        .page {
+            max-width: 780px;
+            margin: 32px auto;
+            background: #fff;
+            padding: 52px 64px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            border-top: 4px solid #4285F4;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #4285F4;
+            background: #e8f0fe;
+            border: 1px solid #c5d9fb;
+            padding: 3px 12px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+        }
+
+        header { margin-bottom: 32px; }
+        h1 { font-size: 28px; font-weight: 400; color: #202124; letter-spacing: -0.3px; }
+        .subtitle { font-size: 13px; color: #5f6368; margin-top: 6px; }
+        .headline { font-size: 14px; color: #4285F4; font-weight: 500; margin-top: 4px; }
+
+        section { margin-bottom: 28px; }
+        .section-title {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #4285F4;
+            border-bottom: 1px solid #e8eaed;
+            padding-bottom: 6px;
+            margin-bottom: 16px;
+        }
+
+        p.prose { font-size: 13px; color: #3c4043; line-height: 1.75; }
+
+        .highlights {
+            background: #f8f9fa;
+            border-left: 3px solid #4285F4;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 4px 4px 0;
+        }
+        .highlights-title { font-size: 11px; font-weight: 600; color: #4285F4; margin-bottom: 8px; letter-spacing: 1px; text-transform: uppercase; }
+        .highlights ul { list-style: none; padding: 0; }
+        .highlights li { font-size: 12px; color: #3c4043; padding-left: 16px; position: relative; margin-bottom: 4px; }
+        .highlights li::before { content: "✓"; position: absolute; left: 0; color: #0F9D58; font-size: 11px; }
+
+        .job-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; flex-wrap: wrap; gap: 4px; }
+        .job-title { font-weight: 600; font-size: 15px; color: #202124; }
+        .job-company { font-size: 13px; color: #4285F4; font-weight: 500; margin-top: 2px; }
+        .job-date { font-size: 12px; color: #80868b; }
+
+        ul.resp { list-style: none; padding: 0; }
+        ul.resp li {
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: #3c4043;
+            line-height: 1.6;
+        }
+        ul.resp li::before { content: "·"; position: absolute; left: 6px; color: #4285F4; font-weight: 700; }
+
+        .edu-item { display: flex; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 4px; }
+        .edu-degree { font-weight: 600; font-size: 13px; color: #202124; }
+        .edu-school { font-size: 13px; color: #5f6368; }
+        .edu-note { font-size: 11px; color: #0F9D58; font-weight: 600; margin-top: 2px; }
+        .edu-date { font-size: 12px; color: #80868b; }
+
+        .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 32px; }
+        .skill-category { font-weight: 600; font-size: 12px; color: #202124; margin-bottom: 3px; }
+        .skill-list { font-size: 12px; color: #5f6368; }
+
+        .award-item { margin-bottom: 10px; display: flex; gap: 10px; align-items: flex-start; }
+        .award-icon { width: 20px; height: 20px; background: #e8f0fe; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 10px; margin-top: 2px; }
+        .award-name { font-weight: 600; font-size: 13px; color: #202124; }
+        .award-desc { font-size: 12px; color: #5f6368; margin-top: 1px; }
+
+        @media print {
+            body { background: white; font-size: 12px; }
+            .print-bar { display: none; }
+            .page { margin: 0; padding: 32px 40px; box-shadow: none; max-width: 100%; border-top: 3px solid #4285F4; }
+            .highlights { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+
+        @media (max-width: 600px) {
+            .page { padding: 32px 24px; margin: 16px; }
+            .skills-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="print-bar">
+        <span>🔵 Enhanced with Gemini — achievement-led, data-forward, technical depth</span>
+        <button class="print-btn" onclick="window.print()">Save as PDF</button>
+    </div>
+
+    <div class="page">
+        <div class="badge">✦ Enhanced with Gemini</div>
+
+        <header>
+            <h1>Lisandro Joaquín Mentasti</h1>
+            <p class="headline">Site Reliability Engineer · Platform Engineering · ML Systems</p>
+            <p class="subtitle">London, UK &nbsp;·&nbsp; lisandro.mentasti@gmail.com &nbsp;·&nbsp; github.com/lmenta &nbsp;·&nbsp; linkedin.com/in/lisandromentasti</p>
+        </header>
+
+        <section>
+            <div class="section-title">Profile</div>
+            <p class="prose">
+                Site Reliability Engineer with 6+ years of experience in large-scale distributed systems, specialising in Kubernetes orchestration, infrastructure-as-code, and production observability. Currently at Okta, driving platform reliability for the Workflows product. Pursuing a strategic transition into ML Engineering, leveraging deep infrastructure expertise to close the gap between model development and production deployment.
+            </p>
+        </section>
+
+        <section>
+            <div class="section-title">Key Achievements</div>
+            <div class="highlights">
+                <div class="highlights-title">Impact at Okta</div>
+                <ul>
+                    <li>Sustained 99.9%+ availability for Okta Workflows, serving enterprise-scale deployments globally</li>
+                    <li>Delivered Kubernetes migration on AWS, reducing deployment cycle time and improving resource efficiency</li>
+                    <li>Reduced operational toil through automation tooling, freeing engineering capacity for higher-value work</li>
+                    <li>Implemented structured on-call and post-mortem processes, improving MTTR and system learning from incidents</li>
+                    <li>Established SLO frameworks across multiple services in collaboration with product engineering teams</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-title">Experience</div>
+            <div class="job-header">
+                <div>
+                    <div class="job-title">Site Reliability Engineer</div>
+                    <div class="job-company">Okta &nbsp;·&nbsp; London, UK</div>
+                </div>
+                <div class="job-date">June 2019 – Present</div>
+            </div>
+            <ul class="resp">
+                <li><strong>Platform reliability:</strong> Design and maintain HA infrastructure for Okta Workflows; define SLIs/SLOs aligned with customer impact and business objectives.</li>
+                <li><strong>Infrastructure automation:</strong> Develop tooling in Python and Bash to automate deployment pipelines, operational tasks, and incident workflows.</li>
+                <li><strong>Kubernetes migration:</strong> Led end-to-end migration of production workloads to Kubernetes on AWS (EKS); improved deployment velocity and resource efficiency.</li>
+                <li><strong>Incident management:</strong> Own 24/7 on-call rotation; lead blameless post-mortems with systematic root cause analysis and follow-through on action items.</li>
+                <li><strong>Observability:</strong> Implement and maintain monitoring stack (Prometheus, Grafana, PagerDuty); define alerting standards that reduce noise and improve signal quality.</li>
+            </ul>
+        </section>
+
+        <section>
+            <div class="section-title">Education</div>
+            <div class="edu-item">
+                <div>
+                    <div class="edu-degree">M.S. Data Analytics Engineering</div>
+                    <div class="edu-school">Northeastern University, Boston, MA</div>
+                    <div class="edu-note">🏅 Fulbright Scholar &nbsp;·&nbsp; Dean's Office Fellow</div>
+                </div>
+                <div class="edu-date">2017 – 2019</div>
+            </div>
+            <div class="edu-item">
+                <div>
+                    <div class="edu-degree">Systems Engineering (Ingeniería en Sistemas)</div>
+                    <div class="edu-school">Universidad Tecnológica Nacional (UTN), Argentina</div>
+                </div>
+                <div class="edu-date">2004 – 2009</div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-title">Technical Skills</div>
+            <div class="skills-grid">
+                <div>
+                    <div class="skill-category">Infrastructure & Cloud</div>
+                    <div class="skill-list">Kubernetes (EKS), Docker, OpenShift, Helm, Terraform, AWS, Azure AKS</div>
+                </div>
+                <div>
+                    <div class="skill-category">Languages & APIs</div>
+                    <div class="skill-list">Python, Bash, FastAPI, REST, SQL (PostgreSQL, MySQL)</div>
+                </div>
+                <div>
+                    <div class="skill-category">Observability & Reliability</div>
+                    <div class="skill-list">Prometheus, Grafana, PagerDuty, SLOs/SLIs, incident analysis</div>
+                </div>
+                <div>
+                    <div class="skill-category">AI/ML (in development)</div>
+                    <div class="skill-list">ML pipelines, model serving, Model Context Protocol, CrewAI, data engineering</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-title">Awards</div>
+            <div class="award-item">
+                <div class="award-icon">🏅</div>
+                <div>
+                    <div class="award-name">Argentine Presidential Fellowship (Fulbright) — 2017</div>
+                    <div class="award-desc">Awarded by the Argentine Ministry of Education for graduate study in the US. Competitively selected from national applicant pool.</div>
+                </div>
+            </div>
+            <div class="award-item">
+                <div class="award-icon">🎓</div>
+                <div>
+                    <div class="award-name">Northeastern University Dean's Office Fellowship — 2017</div>
+                    <div class="award-desc">Merit-based award from the Northeastern College of Engineering.</div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
