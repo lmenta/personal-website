@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Journey into Machine Learning Engineering — Lisandro Mentasti</title>
+    <meta name="description" content="How I'm transitioning from SRE to ML Engineering — lessons learned and what's next.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../css/theme.css">
+    <link rel="stylesheet" href="../blog-styles.css">
+</head>
+<body style="background: var(--bg-primary); color: var(--text-primary)">
+
+    <!-- Fixed Header -->
+    <header class="fixed top-0 left-0 right-0 z-50" style="background: var(--bg-primary); border-bottom: 1px solid var(--border-color)">
+        <nav class="max-w-5xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="text-xl font-semibold tracking-tight" style="color: var(--accent-primary)">Lisandro</a>
+                <div class="flex items-center space-x-6">
+                    <div class="hidden sm:flex space-x-6 text-sm">
+                        <a href="../../index.html" class="transition-colors hover:text-[var(--accent-primary)]" style="color: var(--text-secondary)">Home</a>
+                        <a href="../blog.html" style="color: var(--accent-primary)">Blog</a>
+                        <a href="../../technical.html" class="transition-colors hover:text-[var(--accent-primary)]" style="color: var(--text-secondary)">Projects</a>
+                        <a href="../../resume/resume.html" class="transition-colors hover:text-[var(--accent-primary)]" style="color: var(--text-secondary)">Resume</a>
+                    </div>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                        <div class="theme-icons">
+                            <svg class="sun" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/>
+                            </svg>
+                            <svg class="moon" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-6 pt-28 pb-20">
+
+        <!-- Post Header -->
+        <header class="pt-8 mb-10">
+            <!-- Decorative banner -->
+            <div class="h-48 rounded-xl flex items-center justify-center relative overflow-hidden mb-8" style="background: linear-gradient(135deg, #1a1b26 0%, #24283b 60%, #1a1b26 100%)">
+                <div class="absolute inset-0 opacity-30" style="background: radial-gradient(ellipse at 70% 50%, #7aa2f7 0%, transparent 60%)"></div>
+                <div class="relative text-center">
+                    <span class="text-5xl">🧠</span>
+                    <p class="text-sm mt-3 font-mono tracking-widest uppercase" style="color: var(--accent-primary)">ML Engineering</p>
+                </div>
+            </div>
+
+            <div class="flex items-center text-xs gap-3 mb-4" style="color: var(--text-secondary)">
+                <time>February 25, 2025</time>
+                <span>·</span>
+                <span>3 min read</span>
+                <span class="px-2 py-0.5 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">Career</span>
+            </div>
+
+            <h1 class="text-3xl font-bold mb-4" style="color: var(--accent-primary)">My Journey into Machine Learning Engineering</h1>
+            <p class="text-lg leading-relaxed" style="color: var(--text-secondary)">
+                How an SRE starts moving toward ML — what transfers, what doesn't, and what I wish I'd known earlier.
+            </p>
+        </header>
+
+        <!-- Post Content -->
+        <article class="post-content leading-relaxed" style="color: var(--text-primary)">
+
+            <p class="mb-6">
+                As an SRE, I've always been fascinated by how systems learn and adapt. This curiosity naturally led me to explore Machine Learning Engineering — a field where I could combine everything I know about infrastructure with the actual science of making machines smarter.
+            </p>
+
+            <p class="mb-6">
+                The honest truth? The transition is harder than it looks. Not because the concepts are impenetrable — but because the mental model is different. In SRE, you're thinking about uptime and latency. In MLE, you're thinking about loss curves and distribution shift. It takes time to rewire.
+            </p>
+
+            <h2 class="text-2xl font-bold mt-10 mb-4" style="color: var(--accent-primary)">What Transfers</h2>
+
+            <p class="mb-4">More than you'd expect:</p>
+
+            <ul class="space-y-3 mb-8 pl-4">
+                <li class="flex items-start gap-3">
+                    <span style="color: var(--accent-primary)">→</span>
+                    <span><strong>Infrastructure knowledge is invaluable.</strong> ML systems need to run somewhere. GPUs need to be provisioned, models need to be served, data pipelines need to be reliable. SREs know this territory.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span style="color: var(--accent-primary)">→</span>
+                    <span><strong>Monitoring instincts carry over.</strong> Monitoring a model in production is just observability with a new vocabulary. Latency becomes inference time. Error rate becomes model accuracy drift.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span style="color: var(--accent-primary)">→</span>
+                    <span><strong>Systems thinking.</strong> Understanding that everything is a distributed system — data flows, model registries, feature stores — feels natural after years of on-call.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span style="color: var(--accent-primary)">→</span>
+                    <span><strong>Python comfort.</strong> Python is the language of ML. If you've been automating infrastructure with it, you're already halfway there.</span>
+                </li>
+            </ul>
+
+            <h2 class="text-2xl font-bold mt-10 mb-4" style="color: var(--accent-primary)">What I Had to Learn from Scratch</h2>
+
+            <p class="mb-4">The ML-specific concepts took real effort:</p>
+
+            <ol class="space-y-3 mb-8 pl-4 list-decimal list-inside">
+                <li><strong>Statistics and probability</strong> — You can't evaluate a model without understanding what the numbers mean. I went back to basics.</li>
+                <li><strong>Feature engineering</strong> — Raw data is garbage. Turning it into something a model can use is half the job.</li>
+                <li><strong>Model evaluation</strong> — Accuracy is almost never the right metric. F1, AUC-ROC, precision/recall trade-offs — each task has its own evaluation story.</li>
+                <li><strong>The ML lifecycle</strong> — Experiment tracking, model versioning, A/B testing in production, rollback strategies for bad models. Different problems from SRE, same underlying discipline.</li>
+            </ol>
+
+            <blockquote class="border-l-4 pl-6 py-1 my-8 italic" style="border-color: var(--accent-primary); color: var(--text-secondary)">
+                "The best way to learn is by doing. Start small, but start now."
+            </blockquote>
+
+            <h2 class="text-2xl font-bold mt-10 mb-4" style="color: var(--accent-primary)">Where I Am Now</h2>
+
+            <p class="mb-6">
+                I'm currently working through the fundamentals — taking courses, building projects, and trying to connect each ML concept back to something I already understand from infrastructure. I'm building with MCP servers to explore AI tooling, running CrewAI experiments to understand multi-agent systems, and reading whatever papers I can get through without falling asleep.
+            </p>
+
+            <p class="mb-6">
+                The SRE-to-MLE path is real. The combination of skills — being able to both train a model <em>and</em> run it reliably in production — is genuinely rare. I think it's worth the climb.
+            </p>
+
+            <p class="mb-6">
+                More updates coming as I figure things out.
+            </p>
+
+        </article>
+
+        <!-- Post Footer -->
+        <footer class="mt-12 pt-6" style="border-top: 1px solid var(--border-color)">
+            <div class="flex items-center justify-between">
+                <a href="../blog.html" class="text-sm font-medium transition-colors" style="color: var(--accent-primary)">← Back to Blog</a>
+                <a href="../../index.html" class="text-sm transition-colors" style="color: var(--text-secondary)">Home</a>
+            </div>
+        </footer>
+    </main>
+
+    <script src="../../js/theme.js"></script>
+</body>
+</html>

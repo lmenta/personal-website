@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$ whoami - SRE Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">$ whoami</div>
+        <nav class="nav">
+            <a href="#about">about</a>
+            <a href="#projects">projects</a>
+            <a href="#experience">experience</a>
+            <a href="#contact">contact</a>
+            <a href="#resume">resume</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- MOTD Section -->
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button red"></div>
+                    <div class="terminal-button yellow"></div>
+                    <div class="terminal-button green"></div>
+                </div>
+                <div class="terminal-title">terminal — bash — 80×24</div>
+            </div>
+            <div class="terminal-content">
+                <div class="command">$ cat /etc/motd</div>
+                <div class="output">Welcome to my system
+
+<span class="key">Site Reliability Engineer</span> seeking new opportunities
+<span class="key">System uptime:</span> 15+ years in production
+<span class="key">Status:</span> Looking for next challenge
+<span class="key">Specialization:</span> Large-scale distributed systems, automation, incident response</div>
+            </div>
+        </div>
+
+        <!-- Status Section -->
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button red"></div>
+                    <div class="terminal-button yellow"></div>
+                    <div class="terminal-button green"></div>
+                </div>
+                <div class="terminal-title">proc/self/status</div>
+            </div>
+            <div class="terminal-content">
+                <div class="command">$ cat /proc/self/status</div>
+                <div class="output"><span class="key">Name:</span> <span class="value">Senior SRE Professional</span>
+<span class="key">State:</span> <span class="value">Available for hire</span>
+<span class="key">Threads:</span> <span class="value">Distributed systems, monitoring, automation, CI/CD</span>
+<span class="key">VmPeak:</span> <span class="value">15+ years experience</span>
+<span class="key">Interests:</span> <span class="value">Running, photography, cooking, travel</span>
+<span class="key">Runtime:</span> <span class="value">Tech podcasts, open source contributing</span>
+<span class="key">Shell:</span> <span class="value">/bin/bash preferred, but flexible</span>
+<span class="key">Groups:</span> <span class="value">SRE, DevOps, Infrastructure, Cloud Architecture</span></div>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button red"></div>
+                    <div class="terminal-button yellow"></div>
+                    <div class="terminal-button green"></div>
+                </div>
+                <div class="terminal-title">projects</div>
+            </div>
+            <div class="terminal-content">
+                <div class="command">$ ls -la ~/projects/</div>
+                <div class="output">total 42
+drwxr-xr-x  8 sre  sre   256 Sep  9 2025 .
+drwxr-xr-x 15 sre  sre   480 Sep  9 2025 ..
+-rw-r--r--  1 sre  sre  4096 Sep  1 2025 kubernetes-autoscaler.yml
+-rw-r--r--  1 sre  sre  2048 Aug 15 2025 prometheus-config.yml
+drwxr-xr-x  3 sre  sre    96 Aug 10 2025 infrastructure-as-code/
+drwxr-xr-x  4 sre  sre   128 Jul 20 2025 monitoring-dashboards/
+-rwxr-xr-x  1 sre  sre  1024 Jul 15 2025 incident-response-toolkit.sh
+drwxr-xr-x  2 sre  sre    64 Jun 30 2025 log-analysis-tools/
+-rw-r--r--  1 sre  sre   512 Jun 15 2025 SLO-calculator.py</div>
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button red"></div>
+                    <div class="terminal-button yellow"></div>
+                    <div class="terminal-button green"></div>
+                </div>
+                <div class="terminal-title">skills --verbose</div>
+            </div>
+            <div class="terminal-content">
+                <div class="command">$ skills --list --verbose</div>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <div class="key">Cloud Platforms</div>
+                        <div class="value">AWS, GCP, Azure<br>Kubernetes, Docker<br>Terraform, CloudFormation</div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="key">Monitoring</div>
+                        <div class="value">Prometheus, Grafana<br>DataDog, New Relic<br>ELK Stack, Splunk</div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="key">Programming</div>
+                        <div class="value">Python, Go, Bash<br>JavaScript, SQL<br>YAML, JSON</div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="key">Automation</div>
+                        <div class="value">Ansible, Puppet<br>Jenkins, GitLab CI<br>GitHub Actions</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Terminal -->
+        <div class="interactive-terminal">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button red"></div>
+                    <div class="terminal-button yellow"></div>
+                    <div class="terminal-button green"></div>
+                </div>
+                <div class="terminal-title">interactive terminal</div>
+            </div>
+            <div class="terminal-output" id="terminalOutput">
+                <div class="output">Welcome! Try typing 'help' to see available commands.</div>
+            </div>
+            <div class="input-line">
+                <span class="prompt">visitor@portfolio:</span><span class="path">~</span>$ 
+                <input type="text" class="terminal-input" id="terminalInput" placeholder="Type a command...">
+            </div>
+        </div>
+
+        <!-- Help Section -->
+        <div class="help-section">
+            <div class="key">Available Commands:</div>
+            <div class="value">help, about, skills, experience, contact, projects, uptime, clear</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

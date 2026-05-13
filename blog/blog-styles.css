@@ -1,0 +1,46 @@
+/* Blog specific styles */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+article {
+    transition: transform 0.2s ease-in-out;
+}
+
+article:hover {
+    transform: translateY(-2px);
+}
+
+/* Responsive styles */
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Blog post image overlay */
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(36, 40, 59, 1), rgba(36, 40, 59, 0));
+    pointer-events: none;
+}
+
+/* Reading time and date styles */
+.meta {
+    font-size: 0.875rem;
+    color: #9aa5ce;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.meta > * + *::before {
+    content: "•";
+    margin: 0 0.5rem;
+}

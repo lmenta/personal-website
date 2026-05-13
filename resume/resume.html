@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume — Lisandro Joaquín Mentasti</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body style="background: var(--bg-primary); color: var(--text-primary)">
+
+    <!-- Fixed Header -->
+    <header class="fixed top-0 left-0 right-0 z-50" style="background: var(--bg-primary); border-bottom: 1px solid var(--border-color)">
+        <nav class="max-w-5xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-xl font-semibold tracking-tight" style="color: var(--accent-primary)">Lisandro</a>
+                <div class="flex items-center space-x-6">
+                    <div class="hidden sm:flex space-x-6 text-sm">
+                        <a href="../index.html" class="transition-colors hover:text-[var(--accent-primary)]" style="color: var(--text-secondary)">Home</a>
+                        <a href="../blog/blog.html" class="transition-colors hover:text-[var(--accent-primary)]" style="color: var(--text-secondary)">Blog</a>
+                        <a href="../technical.html" class="transition-colors hover:text-[var(--accent-primary)]" style="color: var(--text-secondary)">Projects</a>
+                        <a href="#" style="color: var(--accent-primary)">Resume</a>
+                    </div>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                        <div class="theme-icons">
+                            <svg class="sun" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/>
+                            </svg>
+                            <svg class="moon" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-6 pt-28 pb-20">
+
+        <div class="pt-8 mb-10">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
+                <div>
+                    <h1 class="text-3xl font-bold" style="color: var(--accent-primary)">Lisandro Joaquín Mentasti</h1>
+                    <p class="mt-1 text-sm" style="color: var(--text-secondary)">
+                        London, UK &nbsp;·&nbsp;
+                        <a href="mailto:lisandro.mentasti@gmail.com" class="hover:underline" style="color: var(--accent-primary)">lisandro.mentasti@gmail.com</a>
+                    </p>
+                </div>
+                <a href="LisandroMentasti.pdf" download class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium self-start sm:self-auto" style="background: var(--accent-primary); color: white">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    Download PDF
+                </a>
+            </div>
+        </div>
+
+        <div class="space-y-10">
+
+            <!-- Summary -->
+            <section>
+                <h2 class="text-xs font-semibold uppercase tracking-widest mb-4 pb-2" style="color: var(--accent-primary); border-bottom: 1px solid var(--border-color)">Summary</h2>
+                <p class="text-sm leading-relaxed" style="color: var(--text-secondary)">
+                    Software engineer and Site Reliability Engineer with 6+ years of experience building and operating large-scale distributed systems. Currently at Okta, working on platform reliability and developer tooling. Master's in Data Analytics Engineering from Northeastern University. Aspiring ML Engineer — combining infrastructure expertise with machine learning systems.
+                </p>
+            </section>
+
+            <!-- Experience -->
+            <section>
+                <h2 class="text-xs font-semibold uppercase tracking-widest mb-6 pb-2" style="color: var(--accent-primary); border-bottom: 1px solid var(--border-color)">Experience</h2>
+
+                <div class="space-y-8">
+                    <div>
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
+                            <div>
+                                <h3 class="font-semibold" style="color: var(--text-primary)">Site Reliability Engineer</h3>
+                                <p class="text-sm" style="color: var(--accent-primary)">Okta</p>
+                            </div>
+                            <span class="text-sm" style="color: var(--text-secondary)">June 2019 – Present · London, UK</span>
+                        </div>
+                        <ul class="space-y-2 text-sm" style="color: var(--text-secondary)">
+                            <li class="flex items-start gap-2"><span style="color: var(--accent-primary)">·</span> Build and maintain high availability for Okta Workflows — a no-code automation platform serving enterprise customers.</li>
+                            <li class="flex items-start gap-2"><span style="color: var(--accent-primary)">·</span> Develop internal tooling and automation to reduce operational toil and improve deployment reliability.</li>
+                            <li class="flex items-start gap-2"><span style="color: var(--accent-primary)">·</span> Own on-call rotations, incident response, and post-mortem processes for critical production services.</li>
+                            <li class="flex items-start gap-2"><span style="color: var(--accent-primary)">·</span> Drive infrastructure migrations to Kubernetes on AWS, improving deployment velocity and resource efficiency.</li>
+                            <li class="flex items-start gap-2"><span style="color: var(--accent-primary)">·</span> Collaborate with engineering teams to define SLOs and improve observability across services.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education -->
+            <section>
+                <h2 class="text-xs font-semibold uppercase tracking-widest mb-6 pb-2" style="color: var(--accent-primary); border-bottom: 1px solid var(--border-color)">Education</h2>
+
+                <div class="space-y-5">
+                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
+                        <div>
+                            <h3 class="font-semibold text-sm" style="color: var(--text-primary)">Master of Science, Data Analytics Engineering</h3>
+                            <p class="text-sm" style="color: var(--accent-primary)">Northeastern University</p>
+                            <p class="text-xs mt-1" style="color: var(--text-secondary)">Fulbright Scholar · Dean's Office Fellow</p>
+                        </div>
+                        <span class="text-sm flex-shrink-0" style="color: var(--text-secondary)">2017 – 2019 · Boston, MA</span>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
+                        <div>
+                            <h3 class="font-semibold text-sm" style="color: var(--text-primary)">Systems Engineering (Ingeniería en Sistemas)</h3>
+                            <p class="text-sm" style="color: var(--accent-primary)">Universidad Tecnológica Nacional (UTN)</p>
+                        </div>
+                        <span class="text-sm flex-shrink-0" style="color: var(--text-secondary)">2004 – 2009 · Argentina</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills -->
+            <section>
+                <h2 class="text-xs font-semibold uppercase tracking-widest mb-6 pb-2" style="color: var(--accent-primary); border-bottom: 1px solid var(--border-color)">Skills</h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 text-sm">
+                    <div>
+                        <h3 class="font-medium mb-2" style="color: var(--text-primary)">Infrastructure & Platform</h3>
+                        <p style="color: var(--text-secondary)">Kubernetes, Docker, OpenShift, Helm, Terraform, AWS, Azure AKS, CI/CD</p>
+                    </div>
+                    <div>
+                        <h3 class="font-medium mb-2" style="color: var(--text-primary)">Languages & Frameworks</h3>
+                        <p style="color: var(--text-secondary)">Python, Bash, FastAPI, SQL (PostgreSQL, MySQL)</p>
+                    </div>
+                    <div>
+                        <h3 class="font-medium mb-2" style="color: var(--text-primary)">Observability & Reliability</h3>
+                        <p style="color: var(--text-secondary)">Prometheus, Grafana, PagerDuty, SLOs/SLIs, incident management</p>
+                    </div>
+                    <div>
+                        <h3 class="font-medium mb-2" style="color: var(--text-primary)">AI / ML (learning)</h3>
+                        <p style="color: var(--text-secondary)">ML pipelines, model deployment, MCP, CrewAI, data engineering</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Awards -->
+            <section>
+                <h2 class="text-xs font-semibold uppercase tracking-widest mb-6 pb-2" style="color: var(--accent-primary); border-bottom: 1px solid var(--border-color)">Awards & Recognition</h2>
+
+                <div class="space-y-3 text-sm" style="color: var(--text-secondary)">
+                    <div class="flex items-start gap-2">
+                        <span style="color: var(--accent-primary)">·</span>
+                        <span><strong style="color: var(--text-primary)">Argentine Presidential Fellowship (Fulbright)</strong> — September 2017. Competitive fellowship awarded by the Argentine Ministry of Education for graduate study in the United States.</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <span style="color: var(--accent-primary)">·</span>
+                        <span><strong style="color: var(--text-primary)">Northeastern University Dean's Office Fellowship</strong> — September 2017. Merit-based award from the Northeastern College of Engineering.</span>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="border-top: 1px solid var(--border-color)">
+        <div class="max-w-5xl mx-auto px-6 py-10">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <p class="font-semibold" style="color: var(--accent-primary)">Lisandro Mentasti</p>
+                    <p class="text-sm mt-1" style="color: var(--text-secondary)">SRE · Software Engineer · London</p>
+                </div>
+                <nav class="flex flex-wrap justify-center gap-6 text-sm" style="color: var(--text-secondary)">
+                    <a href="../index.html" class="hover:text-[var(--accent-primary)] transition-colors">Home</a>
+                    <a href="../blog/blog.html" class="hover:text-[var(--accent-primary)] transition-colors">Blog</a>
+                    <a href="../technical.html" class="hover:text-[var(--accent-primary)] transition-colors">Projects</a>
+                    <a href="#" class="hover:text-[var(--accent-primary)] transition-colors">Resume</a>
+                    <a href="mailto:lisandro.mentasti@gmail.com" class="hover:text-[var(--accent-primary)] transition-colors">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/theme.js"></script>
+</body>
+</html>

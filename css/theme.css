@@ -1,0 +1,99 @@
+/* Theme Variables */
+:root {
+    /* Light theme */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fb;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --accent-primary: #2563eb;
+    --accent-hover: #1d4ed8;
+    --border-color: #e5e7eb;
+    --border-primary: #e5e7eb;
+}
+
+/* Dark theme */
+.dark {
+    --bg-primary: #1a1b26;
+    --bg-secondary: #24283b;
+    --text-primary: #a9b1d6;
+    --text-secondary: #9aa5ce;
+    --accent-primary: #7aa2f7;
+    --accent-hover: #bb9af7;
+    --border-color: #2e3249;
+    --border-primary: #2e3249;
+}
+
+/* Body transitions */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Theme toggle switch */
+.theme-toggle {
+    position: relative;
+    width: 64px;
+    height: 32px;
+    padding: 4px;
+    border: none;
+    border-radius: 32px;
+    background-color: #24283b;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+:root:not(.dark) .theme-toggle {
+    background-color: #e5e7eb;
+}
+
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    transition: transform 0.3s ease;
+    z-index: 2;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.dark .theme-toggle::before {
+    transform: translateX(32px);
+}
+
+.theme-icons {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+    pointer-events: none;
+}
+
+.theme-icons svg {
+    width: 14px;
+    height: 14px;
+    z-index: 1;
+}
+
+.theme-icons .sun { color: #ffd700; }
+.theme-icons .moon { color: #a9b1d6; }
+
+/* Headings inherit accent color when using CSS vars */
+code, pre {
+    background-color: var(--bg-secondary);
+    border-radius: 4px;
+}
+
+code {
+    padding: 0.1em 0.4em;
+    font-size: 0.875em;
+}
