@@ -4,12 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects — Lisandro Mentasti</title>
-    <meta name="description" content="Side projects and open source work by Lisandro Mentasti.">
+    <meta name="description" content="Projects by Lisandro Mentasti — AI infrastructure, LLM tooling, and production systems.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .project-image {
+            width: 100%;
+            height: 220px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .project-image .placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
 </head>
-<body class="bg-[var(--bg-primary)] text-[var(--text-primary)]">
+<body style="background: var(--bg-primary); color: var(--text-primary)">
 
     <!-- Fixed Header -->
     <header class="fixed top-0 left-0 right-0 z-50" style="background: var(--bg-primary); border-bottom: 1px solid var(--border-color)">
@@ -25,12 +47,8 @@
                     </div>
                     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
                         <div class="theme-icons">
-                            <svg class="sun" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/>
-                            </svg>
-                            <svg class="moon" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
-                            </svg>
+                            <svg class="sun" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/></svg>
+                            <svg class="moon" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
                         </div>
                     </button>
                 </div>
@@ -40,143 +58,288 @@
 
     <main class="max-w-5xl mx-auto px-6 pt-28 pb-20">
 
-        <div class="pt-8 mb-12">
+        <div class="pt-8 mb-16">
             <h1 class="text-4xl font-bold mb-3" style="color: var(--accent-primary)">Projects</h1>
-            <p class="text-lg" style="color: var(--text-secondary)">Things I've built — side projects, tools, and explorations.</p>
+            <p class="text-lg max-w-2xl" style="color: var(--text-secondary)">
+                Things I've built at the intersection of SRE and AI — production systems, LLM tooling, and infrastructure that runs in the real world.
+            </p>
         </div>
 
-        <!-- Filter Tags -->
-        <div class="flex flex-wrap gap-2 mb-10">
-            <button class="filter-btn active px-3 py-1.5 rounded-lg text-sm font-medium transition-all" data-filter="all">All</button>
-            <button class="filter-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all" data-filter="sre">SRE</button>
-            <button class="filter-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all" data-filter="ai">AI / ML</button>
-            <button class="filter-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all" data-filter="systems">Systems</button>
-            <button class="filter-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all" data-filter="web">Web</button>
-        </div>
+        <div class="space-y-24">
 
-        <!-- Projects Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Project 1: RunCast Intelligence -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+                <div class="project-image">
+                    <!-- Replace src with actual screenshot -->
+                    <svg viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                        <defs>
+                            <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#1a1b26"/>
+                                <stop offset="100%" style="stop-color:#24283b"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="800" height="440" fill="url(#g1)"/>
+                        <!-- Browser chrome -->
+                        <rect x="20" y="20" width="760" height="400" rx="10" fill="#24283b" opacity="0.8"/>
+                        <rect x="20" y="20" width="760" height="36" rx="10" fill="#2e3249"/>
+                        <circle cx="46" cy="38" r="6" fill="#f7768e"/>
+                        <circle cx="66" cy="38" r="6" fill="#ff9e64"/>
+                        <circle cx="86" cy="38" r="6" fill="#9ece6a"/>
+                        <!-- URL bar -->
+                        <rect x="110" y="28" width="540" height="20" rx="4" fill="#1a1b26"/>
+                        <text x="280" y="42" fill="#9aa5ce" font-family="monospace" font-size="11">runcast-intelligence.vercel.app</text>
+                        <!-- Content -->
+                        <text x="400" y="115" text-anchor="middle" fill="#7aa2f7" font-family="sans-serif" font-size="28" font-weight="bold">🎙 RunCast Intelligence</text>
+                        <text x="400" y="148" text-anchor="middle" fill="#9aa5ce" font-family="sans-serif" font-size="14">Ask anything about running</text>
+                        <!-- Search bar -->
+                        <rect x="140" y="165" width="520" height="48" rx="12" fill="#1a1b26" stroke="#2e3249" stroke-width="2"/>
+                        <text x="165" y="196" fill="#4a5568" font-family="sans-serif" font-size="14">how do elites taper for a marathon?</text>
+                        <rect x="604" y="173" width="46" height="32" rx="8" fill="#7aa2f7"/>
+                        <text x="627" y="194" text-anchor="middle" fill="white" font-family="sans-serif" font-size="12">Ask</text>
+                        <!-- Answer card -->
+                        <rect x="140" y="228" width="520" height="90" rx="10" fill="#1e2030" stroke="#3d4466" stroke-width="1"/>
+                        <text x="160" y="252" fill="#9aa5ce" font-family="sans-serif" font-size="11">Based on podcast transcripts…</text>
+                        <text x="160" y="272" fill="#a9b1d6" font-family="sans-serif" font-size="12">Elite marathon tapering follows a 2–3 week protocol...</text>
+                        <text x="160" y="292" fill="#a9b1d6" font-family="sans-serif" font-size="12">The Strength Running Podcast · ep 457 · @44:51</text>
+                        <text x="160" y="308" fill="#7aa2f7" font-family="sans-serif" font-size="11">The Morning Shakeout · ep 218 · @28:18</text>
+                        <!-- Stats -->
+                        <text x="230" y="360" text-anchor="middle" fill="#7aa2f7" font-family="sans-serif" font-size="22" font-weight="bold">9</text>
+                        <text x="230" y="378" text-anchor="middle" fill="#9aa5ce" font-family="sans-serif" font-size="11">Podcasts</text>
+                        <text x="400" y="360" text-anchor="middle" fill="#7aa2f7" font-family="sans-serif" font-size="22" font-weight="bold">4,151</text>
+                        <text x="400" y="378" text-anchor="middle" fill="#9aa5ce" font-family="sans-serif" font-size="11">Episodes indexed</text>
+                        <text x="570" y="360" text-anchor="middle" fill="#7aa2f7" font-family="sans-serif" font-size="22" font-weight="bold">589</text>
+                        <text x="570" y="378" text-anchor="middle" fill="#9aa5ce" font-family="sans-serif" font-size="11">Searchable chunks</text>
+                    </svg>
+                </div>
 
-            <div class="project-card p-6 rounded-xl flex flex-col" data-tags="sre" style="background: var(--bg-secondary); border: 1px solid var(--border-color)">
-                <div class="flex items-start justify-between mb-4">
-                    <div class="text-2xl">⏱</div>
-                    <div class="flex items-center gap-2">
-                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">SRE</span>
-                        <a href="https://github.com/lisandromentasti/incident_timeline" target="_blank" rel="noopener" class="transition-colors" style="color: var(--text-secondary)">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-3xl">🎙</span>
+                        <div>
+                            <h2 class="text-2xl font-bold" style="color: var(--text-primary)">RunCast Intelligence</h2>
+                            <p class="text-sm" style="color: var(--text-secondary)">Semantic search for running podcasts</p>
+                        </div>
+                    </div>
+
+                    <p class="text-sm leading-relaxed mb-4" style="color: var(--text-secondary)">
+                        I transcribed thousands of hours of running podcasts using OpenAI Whisper, split them into chunks, embedded each chunk with a vector model, and stored everything in Supabase pgvector. Now you can ask "how do elites taper for a marathon?" and get a real answer — with exact timestamps so you can jump straight to the source.
+                    </p>
+                    <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary)">
+                        The search pipeline embeds your query, runs cosine similarity against 589 transcript chunks across 9 podcasts, and feeds the top results to a Claude RAG pipeline that writes the answer. The whole thing runs on a FastAPI backend deployed on Railway, with a Next.js frontend on Vercel.
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">Python</span>
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">FastAPI</span>
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">Supabase pgvector</span>
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">OpenAI Whisper</span>
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">RAG</span>
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">Next.js</span>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <a href="https://runcast-intelligence.vercel.app" target="_blank" rel="noopener"
+                           class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white transition-all hover:opacity-90"
+                           style="background: var(--accent-primary)">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            Live demo
+                        </a>
+                        <a href="https://github.com/lmenta/runcast-intelligence" target="_blank" rel="noopener"
+                           class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all"
+                           style="background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-primary)">
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                            GitHub
                         </a>
                     </div>
                 </div>
-                <h3 class="text-lg font-semibold mb-2" style="color: var(--text-primary)">Incident Timeline API</h3>
-                <p class="text-sm leading-relaxed flex-1" style="color: var(--text-secondary)">
-                    A FastAPI service for managing software incident timelines. Create incidents, add status updates, track severity changes, and query full incident history. Built to scratch a real itch during on-call.
-                </p>
-                <div class="mt-4 flex flex-wrap gap-2">
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">Python</span>
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">FastAPI</span>
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">REST API</span>
-                </div>
             </div>
 
-            <div class="project-card p-6 rounded-xl flex flex-col" data-tags="ai" style="background: var(--bg-secondary); border: 1px solid var(--border-color)">
-                <div class="flex items-start justify-between mb-4">
-                    <div class="text-2xl">🔌</div>
-                    <div class="flex items-center gap-2">
-                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">AI</span>
-                        <a href="https://github.com/lisandromentasti/mcpserver" target="_blank" rel="noopener" class="transition-colors" style="color: var(--text-secondary)">
+            <hr style="border-color: var(--border-color)">
+
+            <!-- Project 2: WineSnap -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+                <div class="project-image order-first lg:order-last">
+                    <svg viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                        <defs>
+                            <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#1a0808"/>
+                                <stop offset="100%" style="stop-color:#2d1010"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="800" height="440" fill="url(#g2)"/>
+                        <!-- Phone frame -->
+                        <rect x="270" y="20" width="260" height="400" rx="30" fill="#0d0d0d" stroke="#333" stroke-width="2"/>
+                        <rect x="278" y="28" width="244" height="384" rx="24" fill="#1a0a0a"/>
+                        <!-- Notch -->
+                        <rect x="360" y="28" width="80" height="22" rx="11" fill="#0d0d0d"/>
+                        <!-- App header -->
+                        <rect x="278" y="50" width="244" height="50" fill="#7f1d1d" opacity="0.8"/>
+                        <text x="400" y="82" text-anchor="middle" fill="white" font-family="sans-serif" font-size="18" font-weight="bold">🍷 WineSnap</text>
+                        <!-- Upload buttons -->
+                        <rect x="285" y="110" width="115" height="90" rx="12" fill="#2d1010" stroke="#7f1d1d" stroke-width="1"/>
+                        <text x="342" y="152" text-anchor="middle" fill="#ef4444" font-family="sans-serif" font-size="20">📷</text>
+                        <text x="342" y="172" text-anchor="middle" fill="#d1d5db" font-family="sans-serif" font-size="11">Take Photo</text>
+                        <rect x="410" y="110" width="105" height="90" rx="12" fill="#1c1c1c" stroke="#444" stroke-width="1"/>
+                        <text x="462" y="152" text-anchor="middle" fill="#9ca3af" font-family="sans-serif" font-size="20">📁</text>
+                        <text x="462" y="172" text-anchor="middle" fill="#9ca3af" font-family="sans-serif" font-size="11">Gallery</text>
+                        <!-- Wine image area -->
+                        <rect x="285" y="212" width="230" height="70" rx="8" fill="#2d1010"/>
+                        <text x="400" y="252" text-anchor="middle" fill="#9ca3af" font-family="sans-serif" font-size="11">📸 wine shelf photo.jpg</text>
+                        <!-- Result card -->
+                        <rect x="285" y="294" width="230" height="100" rx="10" fill="#1a0505" stroke="#7f1d1d" stroke-width="2"/>
+                        <text x="295" y="313" fill="#fca5a5" font-family="sans-serif" font-size="9">⭐ BEST PICK</text>
+                        <text x="295" y="330" fill="white" font-family="sans-serif" font-size="13" font-weight="bold">Guigal Côtes du Rhône</text>
+                        <text x="295" y="346" fill="#9ca3af" font-family="sans-serif" font-size="10">£12.50 · 89pts · Value: 7.12</text>
+                        <text x="295" y="364" fill="#d1d5db" font-family="sans-serif" font-size="9">At £12.50 with 89 points, this beats</text>
+                        <text x="295" y="376" fill="#d1d5db" font-family="sans-serif" font-size="9">everything else on the shelf for value.</text>
+                        <!-- Left side annotation -->
+                        <text x="60" y="120" fill="#ef4444" font-family="sans-serif" font-size="13" font-weight="bold">Vision AI</text>
+                        <text x="60" y="138" fill="#9ca3af" font-family="sans-serif" font-size="11">reads labels</text>
+                        <line x1="180" y1="130" x2="270" y2="155" stroke="#ef4444" stroke-width="1" stroke-dasharray="4"/>
+                        <text x="60" y="240" fill="#ef4444" font-family="sans-serif" font-size="13" font-weight="bold">Live search</text>
+                        <text x="60" y="258" fill="#9ca3af" font-family="sans-serif" font-size="11">price + ratings</text>
+                        <line x1="180" y1="250" x2="270" y2="250" stroke="#ef4444" stroke-width="1" stroke-dasharray="4"/>
+                        <text x="520" y="340" fill="#ef4444" font-family="sans-serif" font-size="13" font-weight="bold">LLM picks</text>
+                        <text x="520" y="358" fill="#9ca3af" font-family="sans-serif" font-size="11">best value</text>
+                        <line x1="515" y1="350" x2="515" y2="350" stroke="#ef4444" stroke-width="1"/>
+                    </svg>
+                </div>
+
+                <div class="order-last lg:order-first">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-3xl">🍷</span>
+                        <div>
+                            <h2 class="text-2xl font-bold" style="color: var(--text-primary)">WineSnap</h2>
+                            <p class="text-sm" style="color: var(--text-secondary)">AI wine picker from photos</p>
+                        </div>
+                    </div>
+
+                    <p class="text-sm leading-relaxed mb-4" style="color: var(--text-secondary)">
+                        You're standing in front of a wine shelf. You don't know where to start. Take a photo — WineSnap reads every label using a vision model, searches the web for live prices and critic scores for each wine, then tells you which bottle is the best value for your money (or your dinner, or your occasion).
+                    </p>
+                    <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary)">
+                        The pipeline runs three stages in sequence: Gemini Vision extracts wine names from the photo, Tavily searches for price and score for each one in parallel, and an LLM calculates the value ratio (score ÷ price) and writes the recommendation. Deployed as a mobile-first PWA — add it to your home screen and use it like a native app.
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">Python</span>
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">FastAPI</span>
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">Gemini Vision</span>
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">Tavily</span>
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">Next.js PWA</span>
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">OpenRouter</span>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <a href="https://winesnap-app.vercel.app" target="_blank" rel="noopener"
+                           class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white transition-all hover:opacity-90"
+                           style="background: var(--accent-primary)">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            Live demo
+                        </a>
+                        <a href="https://github.com/lmenta/winesnap" target="_blank" rel="noopener"
+                           class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all"
+                           style="background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-primary)">
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                            GitHub
                         </a>
                     </div>
                 </div>
-                <h3 class="text-lg font-semibold mb-2" style="color: var(--text-primary)">MCP Server</h3>
-                <p class="text-sm leading-relaxed flex-1" style="color: var(--text-secondary)">
-                    A custom Model Context Protocol (MCP) server in Python. Extends AI assistants (Claude, etc.) with custom tools and context sources — a way to give AI models access to your own data and actions.
-                </p>
-                <div class="mt-4 flex flex-wrap gap-2">
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">Python</span>
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">MCP</span>
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">Claude</span>
-                </div>
             </div>
 
-            <div class="project-card p-6 rounded-xl flex flex-col" data-tags="systems" style="background: var(--bg-secondary); border: 1px solid var(--border-color)">
-                <div class="flex items-start justify-between mb-4">
-                    <div class="text-2xl">📨</div>
-                    <div class="flex items-center gap-2">
-                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">Systems</span>
-                        <a href="https://github.com/lisandromentasti/codecrafters-kafka-python" target="_blank" rel="noopener" class="transition-colors" style="color: var(--text-secondary)">
+            <hr style="border-color: var(--border-color)">
+
+            <!-- Project 3: InferenceForge -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+                <div class="project-image">
+                    <svg viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                        <defs>
+                            <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#0a0a1a"/>
+                                <stop offset="100%" style="stop-color:#0d1117"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="800" height="440" fill="url(#g3)"/>
+                        <!-- Terminal / kubectl output -->
+                        <rect x="40" y="30" width="720" height="220" rx="8" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+                        <rect x="40" y="30" width="720" height="28" rx="8" fill="#161b22"/>
+                        <circle cx="62" cy="44" r="5" fill="#f85149"/>
+                        <circle cx="80" cy="44" r="5" fill="#d29922"/>
+                        <circle cx="98" cy="44" r="5" fill="#3fb950"/>
+                        <text x="400" y="48" text-anchor="middle" fill="#8b949e" font-family="monospace" font-size="11">kubectl — inferenceforge</text>
+                        <!-- kubectl output lines -->
+                        <text x="60" y="82" fill="#3fb950" font-family="monospace" font-size="12">$ kubectl get pods -n inferenceforge</text>
+                        <text x="60" y="100" fill="#8b949e" font-family="monospace" font-size="11">NAME                                    READY   STATUS    RESTARTS</text>
+                        <text x="60" y="116" fill="#e6edf3" font-family="monospace" font-size="11">inferenceforge-gateway-7d9f6-x2k9p      1/1     Running   0</text>
+                        <text x="60" y="132" fill="#e6edf3" font-family="monospace" font-size="11">inferenceforge-gateway-7d9f6-m8n3q      1/1     Running   0</text>
+                        <text x="60" y="148" fill="#e6edf3" font-family="monospace" font-size="11">inferenceforge-model-gpu-6c8b4-t4x7z    1/1     Running   0</text>
+                        <text x="340" y="148" fill="#58a6ff" font-family="monospace" font-size="11">nvidia.com/gpu=1</text>
+                        <text x="60" y="166" fill="#3fb950" font-family="monospace" font-size="12">$ helm upgrade inferenceforge . -f values-gpu.yaml</text>
+                        <text x="60" y="184" fill="#8b949e" font-family="monospace" font-size="11">Release "inferenceforge" has been upgraded. Happy Helming!</text>
+                        <text x="60" y="200" fill="#e6edf3" font-family="monospace" font-size="11">STATUS: deployed  REVISION: 3</text>
+                        <text x="60" y="218" fill="#3fb950" font-family="monospace" font-size="12">$ curl localhost:8080/metrics | grep tokens</text>
+                        <text x="60" y="236" fill="#58a6ff" font-family="monospace" font-size="11">inferenceforge_tokens_total{model="mistral-7b"} 84291</text>
+                        <!-- Grafana dashboard sketch -->
+                        <rect x="40" y="268" width="720" height="150" rx="8" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+                        <text x="60" y="290" fill="#9ca3af" font-family="sans-serif" font-size="11" font-weight="bold">Grafana — InferenceForge Dashboard</text>
+                        <!-- Charts -->
+                        <rect x="55" y="300" width="155" height="100" rx="4" fill="#1f2937"/>
+                        <text x="132" y="316" text-anchor="middle" fill="#9ca3af" font-family="sans-serif" font-size="9">Requests/sec</text>
+                        <polyline points="65,385 80,370 95,375 110,355 125,360 140,340 155,345 170,330 185,338 200,325" fill="none" stroke="#60a5fa" stroke-width="1.5"/>
+
+                        <rect x="225" y="300" width="155" height="100" rx="4" fill="#1f2937"/>
+                        <text x="302" y="316" text-anchor="middle" fill="#9ca3af" font-family="sans-serif" font-size="9">Latency p99 (s)</text>
+                        <polyline points="235,380 255,370 275,365 295,358 315,362 335,350 355,355 370,345" fill="none" stroke="#f472b6" stroke-width="1.5"/>
+
+                        <rect x="395" y="300" width="155" height="100" rx="4" fill="#1f2937"/>
+                        <text x="472" y="316" text-anchor="middle" fill="#9ca3af" font-family="sans-serif" font-size="9">Queue depth</text>
+                        <polyline points="405,385 420,383 435,380 450,370 465,365 480,355 495,360 510,350 530,345 545,348" fill="none" stroke="#34d399" stroke-width="1.5"/>
+
+                        <rect x="565" y="300" width="180" height="100" rx="4" fill="#1f2937"/>
+                        <text x="655" y="316" text-anchor="middle" fill="#9ca3af" font-family="sans-serif" font-size="9">GPU utilisation %</text>
+                        <polyline points="575,370 590,365 605,368 620,360 635,355 650,348 665,352 680,340 695,342 720,338 735,334" fill="none" stroke="#fb923c" stroke-width="1.5"/>
+                        <text x="690" y="338" fill="#fb923c" font-family="sans-serif" font-size="10" font-weight="bold">87%</text>
+                    </svg>
+                </div>
+
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-3xl">⚡</span>
+                        <div>
+                            <h2 class="text-2xl font-bold" style="color: var(--text-primary)">InferenceForge</h2>
+                            <p class="text-sm" style="color: var(--text-secondary)">GPU inference platform on Kubernetes</p>
+                        </div>
+                    </div>
+
+                    <p class="text-sm leading-relaxed mb-4" style="color: var(--text-secondary)">
+                        A production-grade LLM serving platform designed for GPU Kubernetes clusters. One Helm flag separates a local CPU deployment (Ollama + TinyLlama, zero cost) from a GPU deployment (vLLM + Mistral-7B on NVIDIA T4s on EKS). The architecture is the same either way.
+                    </p>
+                    <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary)">
+                        The gateway sits in front of the model backend and handles everything you'd need in production: OpenAI-compatible API, request queue (scales on queue depth via custom HPA metric — not just CPU), rate limiting, streaming responses, and Prometheus metrics for latency histograms, token throughput, and active requests. The Terraform provisions EKS with Karpenter so GPU nodes scale to zero when idle.
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">Kubernetes</span>
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">GPU / NVIDIA</span>
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">FastAPI</span>
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">Helm</span>
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">Terraform</span>
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">Prometheus</span>
+                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">vLLM</span>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <a href="https://github.com/lmenta/inferenceforge" target="_blank" rel="noopener"
+                           class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white transition-all hover:opacity-90"
+                           style="background: var(--accent-primary)">
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                            View on GitHub
                         </a>
+                        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs"
+                              style="background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-secondary)">
+                            In progress
+                        </span>
                     </div>
-                </div>
-                <h3 class="text-lg font-semibold mb-2" style="color: var(--text-primary)">Kafka from Scratch</h3>
-                <p class="text-sm leading-relaxed flex-1" style="color: var(--text-secondary)">
-                    Building Apache Kafka from scratch in Python as part of CodeCrafters challenges. Implements the Kafka wire protocol, topic/partition handling, and consumer groups — a deep dive into distributed systems internals.
-                </p>
-                <div class="mt-4 flex flex-wrap gap-2">
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">Python</span>
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">Kafka</span>
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">Distributed Systems</span>
-                </div>
-            </div>
-
-            <div class="project-card p-6 rounded-xl flex flex-col" data-tags="systems" style="background: var(--bg-secondary); border: 1px solid var(--border-color)">
-                <div class="flex items-start justify-between mb-4">
-                    <div class="text-2xl">🐚</div>
-                    <div class="flex items-center gap-2">
-                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">Systems</span>
-                        <a href="https://github.com/lisandromentasti/codecrafters-shell-python" target="_blank" rel="noopener" class="transition-colors" style="color: var(--text-secondary)">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                        </a>
-                    </div>
-                </div>
-                <h3 class="text-lg font-semibold mb-2" style="color: var(--text-primary)">Shell from Scratch</h3>
-                <p class="text-sm leading-relaxed flex-1" style="color: var(--text-secondary)">
-                    Implementing a POSIX-compliant shell interpreter in Python via CodeCrafters. Covers command parsing, piping, redirections, built-ins, and process management.
-                </p>
-                <div class="mt-4 flex flex-wrap gap-2">
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">Python</span>
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">Shell</span>
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">POSIX</span>
-                </div>
-            </div>
-
-            <div class="project-card p-6 rounded-xl flex flex-col" data-tags="ai" style="background: var(--bg-secondary); border: 1px solid var(--border-color)">
-                <div class="flex items-start justify-between mb-4">
-                    <div class="text-2xl">🤖</div>
-                    <div class="flex items-center gap-2">
-                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">AI</span>
-                        <a href="https://github.com/lisandromentasti/crewai" target="_blank" rel="noopener" class="transition-colors" style="color: var(--text-secondary)">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                        </a>
-                    </div>
-                </div>
-                <h3 class="text-lg font-semibold mb-2" style="color: var(--text-primary)">CrewAI Experiments</h3>
-                <p class="text-sm leading-relaxed flex-1" style="color: var(--text-secondary)">
-                    Exploring multi-agent AI workflows using CrewAI. Building crews of specialized agents that collaborate on complex tasks — an early exploration of agentic AI systems.
-                </p>
-                <div class="mt-4 flex flex-wrap gap-2">
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">Python</span>
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">CrewAI</span>
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">Agents</span>
-                </div>
-            </div>
-
-            <div class="project-card p-6 rounded-xl flex flex-col" data-tags="web" style="background: var(--bg-secondary); border: 1px solid var(--border-color)">
-                <div class="flex items-start justify-between mb-4">
-                    <div class="text-2xl">📅</div>
-                    <div class="flex items-center gap-2">
-                        <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">Web</span>
-                    </div>
-                </div>
-                <h3 class="text-lg font-semibold mb-2" style="color: var(--text-primary)">Timeline Generator</h3>
-                <p class="text-sm leading-relaxed flex-1" style="color: var(--text-secondary)">
-                    A web tool for generating visual timelines. Useful for post-mortems, project planning, and incident retrospectives. Built as a practical tool for SRE work.
-                </p>
-                <div class="mt-4 flex flex-wrap gap-2">
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">JavaScript</span>
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">Web</span>
-                    <span class="text-xs px-2 py-1 rounded" style="background: var(--bg-primary); color: var(--text-secondary)">SRE</span>
                 </div>
             </div>
 
@@ -203,42 +366,5 @@
     </footer>
 
     <script src="js/theme.js"></script>
-    <script>
-        // Filter functionality
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const projectCards = document.querySelectorAll('.project-card');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                const filter = btn.dataset.filter;
-                projectCards.forEach(card => {
-                    if (filter === 'all' || card.dataset.tags.includes(filter)) {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
-    </script>
-    <style>
-        .filter-btn {
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-        .filter-btn.active {
-            background: var(--accent-primary);
-            color: white;
-            border-color: var(--accent-primary);
-        }
-        .filter-btn:hover:not(.active) {
-            border-color: var(--accent-primary);
-            color: var(--accent-primary);
-        }
-    </style>
 </body>
 </html>
