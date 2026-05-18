@@ -1,34 +1,77 @@
-/* Custom styles */
+/* ── Fonts ─────────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
+
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 300;
     scroll-behavior: smooth;
 }
 
-a {
-    transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+/* ── Grain texture ─────────────────────────────────────────────────────────── */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.022;
+    pointer-events: none;
+    z-index: 9000;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
+/* ── Typography ───────────────────────────────────────────────────────────── */
+.font-serif { font-family: 'Instrument Serif', Georgia, serif; }
+.font-mono-dm { font-family: 'DM Mono', 'Fira Mono', monospace; }
+h1, h2, h3 { font-weight: 400; }
+
+/* ── Links ─────────────────────────────────────────────────────────────────── */
+a { transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out; }
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
 ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
 
-/* Fade in */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
+/* ── Animations ────────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
-.animate-fadeIn { animation: fadeIn 0.5s ease-out forwards; }
+.fade-up   { animation: fadeUp 0.6s ease-out forwards; }
+.fade-up-1 { animation-delay: 0.05s; opacity: 0; }
+.fade-up-2 { animation-delay: 0.15s; opacity: 0; }
+.fade-up-3 { animation-delay: 0.25s; opacity: 0; }
 
-/* Blog post article content */
-.post-content p { margin-bottom: 1.5rem; }
-.post-content h2 { margin-top: 2.5rem; margin-bottom: 1rem; }
-.post-content ul, .post-content ol { margin-bottom: 2rem; }
+/* ── Project accent borders ────────────────────────────────────────────────── */
+.project-runcast  { border-left: 2px solid #7aa2f7 !important; }
+.project-winesnap { border-left: 2px solid #bb9af7 !important; }
+.project-forge    { border-left: 2px solid #e0af68 !important; }
+.project-runcast:hover  { box-shadow: -3px 0 16px rgba(122,162,247,0.12); }
+.project-winesnap:hover { box-shadow: -3px 0 16px rgba(187,154,247,0.12); }
+.project-forge:hover    { box-shadow: -3px 0 16px rgba(224,175,104,0.12); }
+
+/* ── Blog post content ─────────────────────────────────────────────────────── */
+.post-content p          { margin-bottom: 1.5rem; }
+.post-content h2         { margin-top: 2.5rem; margin-bottom: 1rem; }
+.post-content ul,
+.post-content ol         { margin-bottom: 2rem; }
 .post-content blockquote { margin: 2rem 0; }
-.post-content strong { color: var(--text-primary); }
+.post-content strong     { color: var(--text-primary); }
 
-/* Card hover border accent */
-[style*="border: 1px solid var(--border-color)"]:hover {
-    border-color: var(--accent-primary) !important;
+/* ── Skills strip ──────────────────────────────────────────────────────────── */
+.skills-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.03em;
 }
+.skills-strip span {
+    color: var(--text-secondary);
+    padding: 0 10px;
+    border-right: 1px solid var(--border-color);
+    line-height: 2;
+}
+.skills-strip span:first-child { padding-left: 0; }
+.skills-strip span:last-child  { border-right: none; }
