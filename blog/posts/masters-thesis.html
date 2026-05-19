@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Master's Thesis: Teaching a Neural Network to Hear a Motor Breaking — Lisandro Mentasti</title>
+    <meta name="description" content="How I used image recognition to detect bearing faults in electric motors — and what it taught me about research, deep learning, and debugging your assumptions.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../css/theme.css">
+    <link rel="stylesheet" href="../blog-styles.css">
+</head>
+<body style="background: var(--bg-primary); color: var(--text-primary)">
+
+    <!-- Fixed Header -->
+    <header class="fixed top-0 left-0 right-0 z-50" style="background: var(--bg-primary); border-bottom: 1px solid var(--border-color)">
+        <nav class="max-w-5xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="font-serif text-lg" style="color: var(--accent-primary)">Lisandro</a>
+                <div class="flex items-center space-x-6">
+                    <div class="hidden sm:flex space-x-6 text-sm">
+                        <a href="../../index.html" class="transition-colors hover:text-[var(--accent-primary)]" style="color: var(--text-secondary)">Home</a>
+                        <a href="../blog.html" style="color: var(--accent-primary)">Blog</a>
+                        <a href="../../technical.html" class="transition-colors hover:text-[var(--accent-primary)]" style="color: var(--text-secondary)">Projects</a>
+                        <a href="../../resume/resume.html" class="transition-colors hover:text-[var(--accent-primary)]" style="color: var(--text-secondary)">Resume</a>
+                    </div>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                        <div class="theme-icons">
+                            <svg class="sun" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/></svg>
+                            <svg class="moon" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-6 pt-28 pb-20">
+
+        <header class="pt-8 mb-10">
+            <div class="h-48 rounded-xl flex items-center justify-center relative overflow-hidden mb-8" style="background: linear-gradient(135deg, #1a1b26 0%, #24283b 60%, #1a1b26 100%)">
+                <div class="absolute inset-0 opacity-30" style="background: radial-gradient(ellipse at 50% 50%, #7aa2f7 0%, transparent 65%)"></div>
+                <div class="relative text-center">
+                    <span class="text-5xl">🎓</span>
+                    <p class="text-sm mt-3 font-mono-dm tracking-widest uppercase" style="color: var(--accent-primary)">Master's Thesis · Northeastern University</p>
+                </div>
+            </div>
+
+            <div class="flex items-center text-xs gap-3 mb-4" style="color: var(--text-secondary)">
+                <time>August 26, 2019</time>
+                <span>·</span>
+                <span>6 min read</span>
+                <span class="px-2 py-0.5 rounded" style="background: var(--bg-secondary); color: var(--text-secondary)">Deep Learning</span>
+            </div>
+
+            <h1 class="text-3xl font-serif mb-4" style="color: var(--accent-primary)">My Master's Thesis: Teaching a Neural Network to Hear a Motor Breaking</h1>
+            <p class="text-lg leading-relaxed" style="color: var(--text-secondary)">
+                How I used image recognition to detect bearing faults in electric motors — and what it taught me about research, deep learning, and debugging your assumptions.
+            </p>
+        </header>
+
+        <article class="post-content leading-relaxed" style="color: var(--text-primary)">
+
+            <p class="mb-6">
+                So basically I spent a good chunk of my masters figuring out if we can use image recognition to detect when a motor is about to break. The idea sounds a bit strange at first, so let me explain.
+            </p>
+
+            <p class="mb-6">
+                When a bearing inside a motor starts failing, the vibration it produces changes in a subtle way. The classic approach to catch this is a technique called Recurrence Quantification Analysis, which works great but takes forever to compute. I wanted to find something faster.
+            </p>
+
+            <p class="mb-6">
+                What I did was take those vibration signals and turn them into images — these weird looking grid pictures called Recurrence Plots. Once you have an image, you can throw it at a Convolutional Neural Network, the same kind of algorithm that recognizes faces in your phone camera.
+            </p>
+
+            <p class="mb-6">
+                I used a public dataset from Case Western Reserve University where they literally drilled tiny cracks into motor bearings and recorded everything. The network had to tell apart three situations: no fault, crack in one spot, crack in another spot.
+            </p>
+
+            <p class="mb-6">
+                Here comes the part I was honestly surprised by — both my CNN approach and the old school method got 100% accuracy. Every single scenario. So the CNN didn't beat the traditional method on accuracy, but it wins on speed once it's trained, which is exactly what you need when you're monitoring machines in real time.
+            </p>
+
+            <p class="mb-6">
+                Beyond the technical stuff, this was genuinely a great experience. I came in knowing very little about deep learning and left feeling like I actually understand how these networks think, which is not something I expected. And research itself taught me something too — mostly that you spend way more time debugging your assumptions than writing actual code, and that is probably how it is supposed to work.
+            </p>
+
+        </article>
+
+        <footer class="mt-12 pt-6" style="border-top: 1px solid var(--border-color)">
+            <div class="flex items-center justify-between">
+                <a href="../blog.html" class="text-sm font-medium transition-colors" style="color: var(--accent-primary)">← Back to Blog</a>
+                <a href="../../index.html" class="text-sm transition-colors" style="color: var(--text-secondary)">Home</a>
+            </div>
+        </footer>
+    </main>
+
+    <script src="../../js/theme.js"></script>
+</body>
+</html>
